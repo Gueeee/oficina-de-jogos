@@ -19,22 +19,25 @@ public class EnemyBehaviour : MonoBehaviour
     {
         transform.Translate(((movingDirection ? -1 : 1) * Vector3.left * Time.deltaTime * speed));
     }
-
-    void OnCollisionEnter2D(Collision2D other)
+    
+    void ResetScene()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            ResetScene();
-        }
+        SceneManager.LoadScene(1);
+    }
 
-        void ResetScene()
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        switch (other.gameObject.tag)
         {
-            SceneManager.LoadScene(1);
-        }
+            case "Player":
+                ResetScene();
 
-        if (other.gameObject.tag == "Edge" || other.gameObject.tag == "Enemy")
-        {
-            movingDirection = !movingDirection;
+                break;
+
+            case "Solid" or "Enemy":
+                movingDirection = !movingDirection;
+
+                break;
         }
     }
 

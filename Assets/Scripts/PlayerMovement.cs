@@ -45,24 +45,24 @@ public class PlayerMovement : MonoBehaviour
         dir.x = Input.GetAxisRaw("Horizontal") * speed;
         dir.y = rb.linearVelocity.y;
 
-        // � pra virar o sprite, mas por enquanto � s� um quadrado
-
-        if (dir.x > 0) sr.flipX = true;
-        if (dir.x < 0) sr.flipX = true;
+        // Virar o sprite
+        if (dir.x > 0) sr.flipX = false;
+        else if (dir.x < 0) sr.flipX = true;
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Solid")) {
-            canJump = true;
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (CompareTag("Enemy"))
+        switch (other.gameObject.tag)
         {
-            dir.y = 0;
-            rb.AddForce(Vector2.up * (jumpForce));
+            case "Solid":
+                canJump = true;
+                canDash = true;
+                
+                break;
+            case "Enemy":
+                dir.y = 0;
+                rb.AddForce(Vector2.up * (jumpForce));
+                
+                break;
         }
     }
 
