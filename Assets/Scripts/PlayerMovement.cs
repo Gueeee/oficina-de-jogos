@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,15 +10,15 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 dir;
     public Rigidbody2D rb;
     public float speed;
-    public Transform groundPivot;
-    public float radius;
-    public LayerMask layer;
     public float jumpForce;
+    public bool canJump;
+    public bool canDash;
     public SpriteRenderer sr;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        canJump = true;
     }
 
     // Update is called once per frame
@@ -33,25 +35,31 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (Input.GetButtonDown("Jump")) {
-            if (Physics2D.OverlapCircle(groundPivot.position, radius, layer))
-            {
+            if (canJump == true) {
                 dir.y = 0;
-                rb.AddForce(Vector2.up * jumpForce );
+                rb.AddForce(Vector2.up * (jumpForce));
+                canJump = false;
             }
         }
 
         dir.x = Input.GetAxisRaw("Horizontal") * speed;
         dir.y = rb.linearVelocity.y;
 
-        // É pra virar o sprite, mas por enquanto é só um quadrado
+        // ï¿½ pra virar o sprite, mas por enquanto ï¿½ sï¿½ um quadrado
 
-        //if (dir.x > 0) sr.flipX = true;
-        //if (dir.x < 0) sr.flipX = true;
+        if (dir.x > 0) sr.flipX = true;
+        if (dir.x < 0) sr.flipX = true;
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Solid")) {
+            canJump = true;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (CompareTag("Enemy"))
         {
             dir.y = 0;
             rb.AddForce(Vector2.up * (jumpForce));
@@ -61,10 +69,5 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = dir;
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(groundPivot.position, radius);
     }
 }
