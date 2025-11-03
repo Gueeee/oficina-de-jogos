@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class PlacaInterativa : MonoBehaviour
 {
-    public GameObject balaoUI; // Referência ao balão de fala (UI)
-    public string textoDaPlaca = "Bem-vindo à Vila!";
+    public GameObject balaoUI;
 
     private void Start()
     {
@@ -18,8 +17,7 @@ public class PlacaInterativa : MonoBehaviour
             if (balaoUI != null)
             {
                 balaoUI.SetActive(true);
-                // Se quiser alterar o texto dinamicamente:
-                // balaoUI.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = textoDaPlaca;
+            
             }
         }
     }
