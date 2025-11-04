@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 dir;
     public Rigidbody2D rb;
     public float speed;
+    [SerializeField] private Animator animator;
     public float jumpForce;
     public bool canJump;
     public bool canDash;
@@ -35,8 +36,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (Input.GetButtonDown("Jump")) {
-            if (canJump == true) {
+            if (canJump == true)
+            {
                 dir.y = 0;
+                animator.SetBool("isJumping", true);
                 rb.AddForce(Vector2.up * (jumpForce));
                 canJump = false;
             }
@@ -44,7 +47,14 @@ public class PlayerMovement : MonoBehaviour
 
         dir.x = Input.GetAxisRaw("Horizontal") * speed;
         dir.y = rb.linearVelocity.y;
-
+        
+        // Animações
+        if(dir.x != 0) {
+            animator.SetBool("isRunning", true);
+        } else {
+            animator.SetBool("isRunning", false);
+        }
+        
         // Virar o sprite
         if (dir.x > 0) sr.flipX = false;
         else if (dir.x < 0) sr.flipX = true;
@@ -56,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
             case "Solid":
                 canJump = true;
                 canDash = true;
+                animator.SetBool("isJumping", false);
                 
                 break;
             case "Enemy":
