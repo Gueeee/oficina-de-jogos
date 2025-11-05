@@ -39,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
             if (canJump == true)
             {
                 dir.y = 0;
-                animator.SetBool("isJumping", true);
                 rb.AddForce(Vector2.up * (jumpForce));
                 canJump = false;
             }
@@ -58,6 +57,14 @@ public class PlayerMovement : MonoBehaviour
         // Virar o sprite
         if (dir.x > 0) sr.flipX = false;
         else if (dir.x < 0) sr.flipX = true;
+
+        
+        animator.SetBool("isJumping", !canJump);
+    }
+    
+    void ResetScene()
+    {
+        SceneManager.LoadScene(1);
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -66,13 +73,23 @@ public class PlayerMovement : MonoBehaviour
             case "Solid":
                 canJump = true;
                 canDash = true;
-                animator.SetBool("isJumping", false);
                 
                 break;
             case "Enemy":
-                dir.y = 0;
-                rb.AddForce(Vector2.up * (jumpForce));
+                ResetScene();
                 
+                break;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.gameObject.tag) {
+            case "Enemy":
+                dir.y = 0;
+                rb.linearVelocity = Vector2.zero;
+                rb.AddForce(Vector2.up * (jumpForce));
+                canJump = false; 
                 break;
         }
     }

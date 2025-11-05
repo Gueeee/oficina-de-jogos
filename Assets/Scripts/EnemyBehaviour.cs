@@ -20,20 +20,10 @@ public class EnemyBehaviour : MonoBehaviour
         transform.Translate(((movingDirection ? -1 : 1) * Vector3.left * Time.deltaTime * speed));
     }
     
-    void ResetScene()
-    {
-        SceneManager.LoadScene(1);
-    }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         switch (other.gameObject.tag)
         {
-            case "Player":
-                ResetScene();
-
-                break;
-
             case "Solid" or "Enemy":
                 movingDirection = !movingDirection;
 
