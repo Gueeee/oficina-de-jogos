@@ -79,6 +79,10 @@ public class PlayerMovement : MonoBehaviour
                 ResetScene();
                 
                 break;
+            case "Respawn":
+                ResetScene();
+                
+                break;
         }
     }
 
