@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     public bool canJump;
     public bool canDash;
     public SpriteRenderer sr;
+    private bool isDashing;
+    private float dashingPower = 12f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update() {
 
+        if (isDashing)
+        {
+            return;
+        }
         if(Input.GetKeyDown(KeyCode.R))
         {
             ResetScene();
@@ -40,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(Vector2.up * (jumpForce));
                 canJump = false;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            StartCoroutine(Dash());
         }
 
         dir.x = Input.GetAxisRaw("Horizontal") * speed;
@@ -68,6 +81,24 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (isDashing)
+        {
+            return;
+        }
         rb.linearVelocity = dir;
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 }
