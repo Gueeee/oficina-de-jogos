@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,16 @@ public class MovingPlatform : MonoBehaviour
         }
 
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed* Time.deltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        switch (other.gameObject.tag) 
+        {
+            case "Placa":
+                other.transform.parent = this.transform;
+                break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

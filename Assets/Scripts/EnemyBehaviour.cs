@@ -7,6 +7,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     bool movingDirection = false;
     [SerializeField] float speed;
+    public SpriteRenderer sr;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +19,7 @@ public class EnemyBehaviour : MonoBehaviour
     void Update()
     {
         transform.Translate(((movingDirection ? -1 : 1) * Vector3.left * Time.deltaTime * speed));
+        sr.flipX = !movingDirection;
     }
     
     private void OnCollisionEnter2D(Collision2D other)
