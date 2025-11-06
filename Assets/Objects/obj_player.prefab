@@ -88,7 +88,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2427185567226571939
@@ -133,9 +133,11 @@ MonoBehaviour:
   dir: {x: 0, y: 0}
   rb: {fileID: 2427185567226571939}
   speed: 5
+  animator: {fileID: 0}
   jumpForce: 500
   canJump: 0
-  canDash: 0
+  _dashingVelocity: 30
+  _dashingTime: 0.5
   sr: {fileID: 8216697431605946024}
 --- !u!61 &7965554948316141031
 BoxCollider2D:
