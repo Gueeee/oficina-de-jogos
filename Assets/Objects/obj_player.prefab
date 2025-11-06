@@ -135,8 +135,11 @@ MonoBehaviour:
   speed: 5
   jumpForce: 500
   canJump: 0
+  dashSpeed: 200
+  dashDuration: 0.7
+  dashCooldown: 0.2
   canDash: 1
-  dashSpeed: 80
+  isDashing: 0
   animator: {fileID: 0}
   sr: {fileID: 8216697431605946024}
 --- !u!61 &7965554948316141031

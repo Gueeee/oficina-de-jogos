@@ -14,13 +14,14 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float jumpForce;
     public bool canJump;
-    
+
     [Header("Dash")]
-    public bool canDash;
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.1f;
+    public float dashCooldown = 0.1f;
+    public bool canDash = true;
     public bool isDashing;
-    public float dashSpeed;
-    private float dashDirection;
-    
+    TrailRenderer trailRenderer;
     
     [Header("Animação")]
     [SerializeField] private Animator animator;
@@ -37,10 +38,60 @@ public class PlayerMovement : MonoBehaviour
     void ResetScene() {
         SceneManager.LoadScene(1);
     }
+
+    public void Dash()
+    {
+        StartCoroutine(DashCoroutine());
+    }
+
+    private IEnumerator DashCoroutine() 
+    {
+        canDash = false;
+        isDashing = true;
+        //trailRenderer.emitting = true;
+        
+        float dashDirection = sr.flipX ? -1f : 1f;
+        
+        rb.AddForce(new Vector2(dashDirection * dashSpeed, rb.linearVelocity.y)); // O dash em si
+        
+        yield return new WaitForSeconds(dashDuration);
+        
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); // reseta a velocidade horizontal
+        
+        isDashing = false;
+        //trailRenderer.emitting = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        
+        canDash = true;
+    }
+    
     // Update is called once per frame
     void Update() {
+        // Animações
+        if(dir.x != 0) { // Se está andando
+            animator.SetBool("isRunning", true);
+        } else {
+            animator.SetBool("isRunning", false);
+        }
+        
+        // Pulo
+        animator.SetBool("isJumping", !canJump);
+        // Dash
+        animator.SetBool("isDashing", isDashing);
+        
+        // Vira o sprite
+        if (dir.x > 0) sr.flipX = false;
+        else if (dir.x < 0) sr.flipX = true;
+        
+        if (isDashing)
+        {
+            return;
+        }
+        
         // Definindo botões
         var inputX = Input.GetAxisRaw("Horizontal");
+        var inputY = Input.GetAxisRaw("Vertical");
         var jumpInput = Input.GetButtonDown("Jump");
         var dashInput = Input.GetButtonDown("Dash");
         var resetInput = Input.GetKeyDown(KeyCode.R);
@@ -60,37 +111,14 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // Dash
-        if (dashInput && canDash) {
-            // dir.y = 0;
-            canDash = false;
-            dashDirection = inputX;
-            
-            isDashing = true;
-        }
-
-        if (isDashing) {
-            dir.x = dashDirection * dashSpeed;
-        }
-        else
+        if (dashInput && canDash)
         {
-            dir.x = inputX * speed;
+            //Dash();
         }
         
-        // Animações
-        if(dir.x != 0) { // Se está andando
-            animator.SetBool("isRunning", true);
-        } else {
-            animator.SetBool("isRunning", false);
+        if (isDashing) {
         }
         
-        // Pulo
-        animator.SetBool("isJumping", !canJump);
-        // Dash
-        // animator.SetBool("isDashing", _isDashing);
-        
-        // Vira o sprite
-        if (dir.x > 0) sr.flipX = false;
-        else if (dir.x < 0) sr.flipX = true;
     }
     
     // Tratando evento das colisões
@@ -100,6 +128,10 @@ public class PlayerMovement : MonoBehaviour
                 canJump = true;
                 canDash = true;
                 isDashing = false;
+                
+                break;
+            case "Finish":
+                SceneManager.LoadScene(2);
                 
                 break;
             case "Enemy":
