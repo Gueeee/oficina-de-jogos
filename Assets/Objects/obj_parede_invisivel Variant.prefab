@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4007151923485561933
+--- !u!1001 &5268974919126869547
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4113876696137797967, guid: ae2909139e1641b4bb0ab52420682f80, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5703568
+      value: -1.9905181
       objectReference: {fileID: 0}
     - target: {fileID: 4113876696137797967, guid: ae2909139e1641b4bb0ab52420682f80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.29061
+      value: 1.0225735
       objectReference: {fileID: 0}
     - target: {fileID: 4113876696137797967, guid: ae2909139e1641b4bb0ab52420682f80, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53,12 +53,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5434235131691524894, guid: ae2909139e1641b4bb0ab52420682f80, type: 3}
-      propertyPath: m_Sprite
-      value: 
+      propertyPath: m_Color.a
+      value: 0.019607844
       objectReference: {fileID: 0}
     - target: {fileID: 5434235131691524894, guid: ae2909139e1641b4bb0ab52420682f80, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434235131691524894, guid: ae2909139e1641b4bb0ab52420682f80, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434235131691524894, guid: ae2909139e1641b4bb0ab52420682f80, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

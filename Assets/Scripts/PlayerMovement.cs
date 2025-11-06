@@ -9,18 +9,28 @@ public class PlayerMovement : MonoBehaviour
 {
     public Vector2 dir;
     public Rigidbody2D rb;
+    
+    [Header("Movimentação")]
     public float speed;
-    [SerializeField] private Animator animator;
     public float jumpForce;
     public bool canJump;
+    
+    [Header("Dash")]
     public bool canDash;
-        
+    public bool isDashing;
+    public float dashSpeed;
+    private float dashDirection;
+    
+    
+    [Header("Animação")]
+    [SerializeField] private Animator animator;
     public SpriteRenderer sr;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         canJump = true;
+        canDash = true;
     }
     
     // Reset na 'Scene'
@@ -51,7 +61,19 @@ public class PlayerMovement : MonoBehaviour
         
         // Dash
         if (dashInput && canDash) {
-            // À fazer
+            // dir.y = 0;
+            canDash = false;
+            dashDirection = inputX;
+            
+            isDashing = true;
+        }
+
+        if (isDashing) {
+            dir.x = dashDirection * dashSpeed;
+        }
+        else
+        {
+            dir.x = inputX * speed;
         }
         
         // Animações
@@ -72,13 +94,12 @@ public class PlayerMovement : MonoBehaviour
     }
     
     // Tratando evento das colisões
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        switch (other.gameObject.tag)
-        {
+    private void OnCollisionEnter2D(Collision2D other) {
+        switch (other.gameObject.tag) {
             case "Solid":
                 canJump = true;
                 canDash = true;
+                isDashing = false;
                 
                 break;
             case "Enemy":
@@ -92,8 +113,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
+    private void OnTriggerEnter2D(Collider2D other) {
         switch (other.gameObject.tag) {
             case "Enemy":
                 dir.y = 0;
