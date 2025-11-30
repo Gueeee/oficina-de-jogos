@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: bloco tutorial (1)4_0
+  m_Name: tutorial_tile_4
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1638213289555839156, guid: 10082f27191b92446b6013b430388c71, type: 3}
+  m_Sprite: {fileID: 869437679, guid: 54da40e343d65d041babb7bd7bc9cbeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

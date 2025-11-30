@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2a1a8bae2e8e98c4dbf3257a91a2bc31
+guid: 5462e8492d691824688b2e4308355e97
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8656360018444769408
-    second: bloco tutorial (1)2_0
+      213: 8074629015228011376
+    second: MOEDA_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 320
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bloco tutorial (1)2_0
+      name: MOEDA_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 320
-        height: 320
+        x: 3
+        y: 2
+        width: 24
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0885b4bc291912870800000000000000
-      internalID: 8656360018444769408
+      spriteID: 0735ab1ee48de0070800000000000000
+      internalID: 8074629015228011376
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      bloco tutorial (1)2_0: 8656360018444769408
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
