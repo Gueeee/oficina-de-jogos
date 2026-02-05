@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
         transform.Translate(((movingDirection ? -1 : 1) * Vector3.left * Time.deltaTime * speed));
         sr.flipX = !movingDirection;
     }
-    
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         switch (other.gameObject.tag)

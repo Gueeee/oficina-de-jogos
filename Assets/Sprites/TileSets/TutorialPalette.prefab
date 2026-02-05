@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 7212657467675740364}
   - component: {fileID: 2324997481744069174}
   m_Layer: 0
-  m_Name: TutorialPallete
+  m_Name: TutorialPalette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
