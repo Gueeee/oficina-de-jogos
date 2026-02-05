@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
                 
                 break;
             case "Finish":
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(scene+1);
                 
                 break;
             case "Enemy":
@@ -151,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
             case "Enemy":
                 dir.y = 0;
                 rb.linearVelocity = Vector2.zero;
-                rb.AddForce(Vector2.up * (jumpForce));
+                rb.AddForce(Vector2.up * (jumpForce*2));
                 canJump = false; 
                 break;
         }
