@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Vector2 dir;
     public Rigidbody2D rb;
+    public int scene = 1;
     
     [Header("Movimentação")]
     public float speed;
@@ -36,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     
     // Reset na 'Scene'
     void ResetScene() {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(scene);
     }
 
     public void Dash()
